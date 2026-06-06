@@ -1,0 +1,113 @@
+<Window x:Class="ClaudeDeepSeekConfigurator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Claude Code 接入 DeepSeek 配置器" Height="640" Width="760"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI, Microsoft YaHei UI" FontSize="13"
+        Background="#FF1E1F22">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="Foreground" Value="#FFE6E6E6"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Hint">
+            <Setter Property="Foreground" Value="#FF9AA0A6"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Background" Value="#FF2B2D31"/>
+            <Setter Property="Foreground" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FF3A3D43"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CaretBrush" Value="#FFF5F5F5"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Background" Value="#FF2B2D31"/>
+            <Setter Property="Foreground" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FF3A3D43"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CaretBrush" Value="#FFF5F5F5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Background" Value="#FF3B82F6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="80"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Claude Code 接入 DeepSeek 配置器"
+                   Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <!-- 输入区 -->
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="API 网关地址 (url)" Style="{StaticResource Label}"/>
+            <TextBox x:Name="UrlBox"/>
+            <TextBlock Text="例如 https://subapi.tohub.top（写入 ANTHROPIC_BASE_URL）" Style="{StaticResource Hint}"/>
+
+            <TextBlock Text="API 密钥 (key)" Style="{StaticResource Label}" Margin="0,14,0,4"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <PasswordBox x:Name="KeyPassword" Grid.Column="0"/>
+                <TextBox x:Name="KeyPlain" Grid.Column="0" Visibility="Collapsed"/>
+                <Button x:Name="ToggleKeyButton" Grid.Column="1" Content="显示"
+                        Background="#FF4B5563" Margin="10,0,0,0" Width="64" Click="ToggleKeyButton_Click"/>
+            </Grid>
+            <TextBlock Text="写入 ANTHROPIC_AUTH_TOKEN" Style="{StaticResource Hint}"/>
+
+            <TextBlock Text="Opus 槽模型 (opus_model)" Style="{StaticResource Label}" Margin="0,14,0,4"/>
+            <TextBox x:Name="OpusBox"/>
+            <TextBlock Text="写入 ANTHROPIC_DEFAULT_OPUS_MODEL" Style="{StaticResource Hint}"/>
+
+            <TextBlock Text="Sonnet 槽模型 (sonnet_model)" Style="{StaticResource Label}" Margin="0,14,0,4"/>
+            <TextBox x:Name="SonnetBox"/>
+            <TextBlock Text="写入 ANTHROPIC_DEFAULT_SONNET_MODEL" Style="{StaticResource Hint}"/>
+
+            <TextBlock Text="Haiku 槽模型 (haiku_model)" Style="{StaticResource Label}" Margin="0,14,0,4"/>
+            <TextBox x:Name="HaikuBox"/>
+            <TextBlock Text="写入 ANTHROPIC_DEFAULT_HAIKU_MODEL" Style="{StaticResource Hint}"/>
+        </StackPanel>
+
+        <!-- 按钮区 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,18,0,12">
+            <Button x:Name="SaveButton" Content="保存配置" Click="SaveButton_Click" Background="#FF4B5563"/>
+            <Button x:Name="ApplyButton" Content="应用配置（写入环境变量 + Claude 设置）" Click="ApplyButton_Click"/>
+            <Button x:Name="LaunchButton" Content="启动 Claude" Click="LaunchButton_Click" Background="#FF22A06B"/>
+        </StackPanel>
+
+        <!-- 日志区 -->
+        <Border Grid.Row="3" Background="#FF141517" CornerRadius="6" Padding="2">
+            <TextBox x:Name="LogBox" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     Foreground="#FFB9F6CA" FontFamily="Consolas, Cascadia Mono"
+                     VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+        </Border>
+    </Grid>
+</Window>

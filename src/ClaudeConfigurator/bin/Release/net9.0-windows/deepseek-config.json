@@ -1,0 +1,7 @@
+{
+  "url": "https://subapi.tohub.top",
+  "key": "sk-12345",
+  "opus_model": "gpt-5.5",
+  "sonnet_model": "gpt-5.3-codex",
+  "haiku_model": "gpt-5.3-codex"
+}

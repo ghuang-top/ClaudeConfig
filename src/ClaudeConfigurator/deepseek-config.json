@@ -1,0 +1,7 @@
+{
+  "url": "https://api.deepseek.com/anthropic",
+  "key": "sk-123",
+  "opus_model": "deepseek-v4-pro[1m]",
+  "sonnet_model": "deepseek-v4-flash[1m]",
+  "haiku_model": "deepseek-v4-lite[1m]"
+}
